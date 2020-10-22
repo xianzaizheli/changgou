@@ -1,0 +1,64 @@
+server:
+  port: 18090
+spring:
+  application:
+    name: order
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.232.128:3306/changgou_order?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+  redis:
+    host: 192.168.232.128
+    port: 6379
+  # 覆盖重复定义类
+  main:
+    allow-bean-definition-overriding: true
+  rabbitmq:
+    username: guest
+    password: guest
+    port: 5672
+    host: 192.168.232.128
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+       defaultZone: http://eureka-server1:8001/eureka/,http://eureka-server2:8002/eureka/,http://eureka-server3:8003/eureka/
+
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    connection-timeout: 10000
+  client:
+    config:
+      default: # 指定feginclients对应的名称，如果指定的是dafault。表示全局所有的client的超时时间设置
+        connectTimeout: 10000
+        readTimeout: 10000
+        loggerLevel: basic
+
+##超时配置
+#ribbon:
+#  ReadTimeout: 300000
+
+#hystrix 配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+          strategy: SEMAPHORE
+
+#交换机和队列
+mq:
+  pay:
+    exchange:
+      order: exchange.order
+    queue:
+      order: queue.order
+    routing:
+      key: queue.order

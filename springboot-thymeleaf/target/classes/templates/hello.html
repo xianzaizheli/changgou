@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--引入thymeleaf-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>你好页面</title>
+</head>
+<body>
+    你好你好！
+    <em style="color: red" th:text="${player}"></em>
+
+    <form th:action="@{/test/dd}">
+        <button>提交</button>
+    </form>
+
+    <table>
+        <tr>
+            <td>下标</td>
+            <td>id</td>
+            <td>名称</td>
+            <td>地址</td>
+        </tr>
+        <tr th:each="user , userStat : ${users}">
+            <td th:text="${userStat.index}"></td>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.address}"></td>
+        </tr>
+    </table>
+
+    <div th:each="map , mapStatus : ${maps}">
+        map:<span th:text="${map}"></span><br/>
+        key:<span th:text="${mapStatus.current.key}"></span><br/>
+        value:<span th:text="${mapStatus.current.value}"></span><br/>
+        -----------------
+        <span></span>
+        <span></span>
+    </div>
+
+    <div th:each="name , nameStatus:${names}">
+        <span th:text="${nameStatus.count}"></span><span th:text="${name}"></span>
+    </div>
+
+    <div>
+        Date数据情况
+        <span th:text="${#dates.format(now,'yyyy-MM-dd hh:mm:ss')}"></span>
+    </div>
+
+    条件判断
+    <div>
+        <span th:if="${age<18}">未成年人</span>
+        <span th:if="${age>18}">成年人</span>
+    </div>
+    ---------------<br/>
+    使用javascript<br/>
+    <button onclick="aa()">启动</button>
+
+    <script th:inline="javascript">
+        var hhh = [[${hello}]];
+        function aa() {
+            alert(hhh);
+        }
+    </script>
+
+    字符串拼接娱乐<br/>
+    <span th:text="${age} + ${maps}"></span><br/>
+    <span th:class="|${class1}${class2}|">类名？？</span>
+</body>
+</html>

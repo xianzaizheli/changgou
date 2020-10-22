@@ -1,0 +1,4 @@
+spring:
+  thymeleaf:
+    # 禁用缓存，这个要配合ctrl+f9使用才对，不然无效的
+    cache: false

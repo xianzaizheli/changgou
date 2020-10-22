@@ -1,0 +1,35 @@
+server:
+  port: 18088
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+
+feign:
+  hystrix:
+    enabled: true
+spring:
+  thymeleaf:
+    cache: false
+  application:
+    name: search-web
+
+# 如果要使用feign，你又启用了熔断机制，那么请你加入一个超时配置
+#超时配置
+ribbon:
+  ReadTimeout: 300000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000
+  # 下面这个就是用于解决bean重复定义的，由于组件多人操作，可能会有相同的bean。但是其实不设置相同的bean就完事了啊，所以不设置默认false就好了
+#  main:
+#    allow-bean-definition-overriding: false
+
+

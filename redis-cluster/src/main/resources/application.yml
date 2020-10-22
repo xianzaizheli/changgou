@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: redis-cluster
+  redis:
+    cluster:
+      nodes:
+        - 192.168.232.128:7001
+        - 192.168.232.128:7002
+        - 192.168.232.128:7003
+        - 192.168.232.128:7004
+        - 192.168.232.128:7005
+        - 192.168.232.128:7006
+  datasource:
+    url: jdbc:mysql://192.168.232.128:3306/changgou_user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true

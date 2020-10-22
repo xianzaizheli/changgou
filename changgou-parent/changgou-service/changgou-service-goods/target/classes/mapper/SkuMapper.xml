@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.changgou.goods.dao.SkuMapper">
+
+    <!-- Employee getEmpById(Integer id); -->
+    <update id="decrCount">
+        update tb_sku set num = num - #{num} , sale_num=sale_num+#{num} where id = #{skuId} and num > #{num}
+    </update>
+
+    <update id="rollBackCount">
+        update tb_sku set num = num + #{num} , sale_num= sale_num - #{num} where id = #{skuId}
+    </update>
+
+
+</mapper>

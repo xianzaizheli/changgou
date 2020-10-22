@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: springboot-amqp
+  rabbitmq:
+    host: 192.168.232.128
+    password: guest
+    username: guest
+server:
+  port: 18000
+
+
+

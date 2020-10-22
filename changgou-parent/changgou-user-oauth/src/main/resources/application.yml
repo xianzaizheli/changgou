@@ -1,0 +1,50 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: user-auth
+  redis:
+    host: 192.168.232.168
+    port: 6379
+    jedis:
+      pool:
+        # 连接池的最大值
+        max-active: 8
+        # 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止
+        max-idle: 8
+        # 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请。
+        min-idle: 0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.232.128:3306/changgou_user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+  thymeleaf:
+    cache: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+
+auth:
+  ttl: 3600 # token存储到redis的过期时间
+  clientId: changgou
+  clientSecret: yanyanyan
+  cookieDomain: localhost
+  cookieMaxAge: -1
+
+# 证书处理
+encrypt:
+  key-store:
+    # 证书别名
+    alias: changgou
+    # 证书位置
+    location: classpath:/changgou.jks
+    # 项目内部配置问题，我直接用，那个人搞反下面两个的定位了，导致我一直报错，去看测试类，那个好点。
+    # 秘密保护密钥（默认为密码相同）
+    secret: chenxiansheng
+    # 锁定密钥库的密码
+    password: yanyanyan

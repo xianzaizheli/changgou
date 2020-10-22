@@ -1,0 +1,57 @@
+server:
+  port: 18092
+
+spring:
+  application:
+    name: pay
+  rabbitmq:
+    port: 5672
+    username: guest
+    password: guest
+    host: 192.168.232.128
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+
+feign:
+  hystrix:
+    enabled: true
+
+#hystrix配置
+hystrix:
+  command:
+    default:
+      execution:
+        timout:
+          #如果enabled设置为false，则请求超时交给ribbon控制
+          enabled: true
+        isolation:
+          strategy: SEMAPJORE
+
+#微信支付信息配置
+weixin:
+  #微信公众号或开放平台APP的唯一标识
+  appid: wx8397f8696b538317
+  #财付通平台的商户账号
+  partner: 1473426802
+  #财付通平台的商户秘钥
+  partnerkey: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
+  #回调地址，这里是自己写的一个方法回调，用到内网穿透
+  notifyurl: http://mpamkkvw.xiaomy.net:80/pay/notify/url
+
+mq:
+  pay:
+    exchange:
+      order: exchange.order
+      seckillOrder: exchange.seckillOrder
+    queue:
+      order: queue.order
+      seckillOrder: queue.seckillOrder
+    routing:
+      key: queue.order
+      seckillOrderKey: queue.seckillOrder
+

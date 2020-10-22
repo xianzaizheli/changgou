@@ -1,0 +1,41 @@
+server:
+  port: 18085
+
+spring:
+  application:
+    name: item
+  thymeleaf:
+    cache: false
+  # 开启允许覆盖定义的bean
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+feign:
+  hystrix:
+    enabled: false
+
+#ribbon:
+#  ReadTimeout: 300000
+#
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 300000
+
+#rabbitmq:
+#  host: 192.168.232.128
+
+
+
+# 生成静态页的位置
+pagepath: E:\畅购商城\changgou-parent\changgou-web\changgou-web-item\src\main\resources\static
+
